@@ -1,0 +1,204 @@
+/* pages/bill-detail/bill-detail.wxss */
+.tab-bar {
+  display: flex;
+  padding: 10rpx;
+  background: #e0e7ff;
+  border-radius: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  border-radius: 20rpx;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tab-item.active {
+  background: #ffffff;
+  box-shadow: 0 4rpx 16rpx rgba(79, 70, 229, 0.2);
+}
+
+.tab-title {
+  font-size: 26rpx;
+  color: #475569;
+  font-weight: 600;
+}
+
+.tab-item.active .tab-title {
+  color: #4f46e5;
+  font-weight: 700;
+}
+
+.tab-amount {
+  font-size: 30rpx;
+  font-weight: 800;
+  color: #1e293b;
+  margin-top: 4rpx;
+}
+
+.tab-item.active .tab-amount {
+  color: #4f46e5;
+}
+
+.card-header {
+  border-bottom: 2rpx solid #f1f5f9;
+  padding-bottom: 20rpx;
+  margin-bottom: 24rpx;
+}
+
+.room-title {
+  display: flex;
+  align-items: center;
+}
+
+.room-title .emoji {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+}
+
+.room-title .name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.total-tag {
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  color: #ffffff;
+  font-size: 26rpx;
+  font-weight: 700;
+  padding: 8rpx 20rpx;
+  border-radius: 30rpx;
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.item-row {
+  padding: 12rpx 0;
+  font-size: 28rpx;
+}
+
+.item-name {
+  color: #334155;
+  font-weight: 600;
+}
+
+.item-val {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* 水电煤子卡片 */
+.utility-box {
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-top: 10rpx;
+}
+
+.water-box {
+  background: #f0f9ff;
+  border: 1rpx solid #bae6fd;
+}
+
+.elec-box {
+  background: #fffbeb;
+  border: 1rpx solid #fde68a;
+}
+
+.gas-box {
+  background: #fff7ed;
+  border: 1rpx solid #fed7aa;
+}
+
+.utility-header {
+  margin-bottom: 8rpx;
+}
+
+.utility-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.utility-total {
+  font-size: 30rpx;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.usage-sub {
+  font-size: 22rpx;
+  color: #64748b;
+  margin-bottom: 12rpx;
+}
+
+.tier-list {
+  border-top: 1rpx dashed rgba(0, 0, 0, 0.1);
+  padding-top: 10rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.tier-row {
+  font-size: 24rpx;
+  color: #475569;
+}
+
+/* 微信复制文本 */
+.copy-preview-card {
+  background: #ffffff;
+}
+
+.btn-copy {
+  background: #22c55e;
+  color: #ffffff;
+  font-size: 24rpx;
+  font-weight: 600;
+  padding: 10rpx 20rpx;
+  border-radius: 30rpx;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.text-preview {
+  background: #f8fafc;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  font-family: monospace;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: #334155;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* 底部按钮 */
+.action-buttons {
+  margin-top: 30rpx;
+  margin-bottom: 60rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.btn-danger-outline {
+  background: #ffffff;
+  color: #ef4444;
+  border: 2rpx solid #fca5a5;
+  font-weight: 600;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+  padding: 18rpx 0;
+  text-align: center;
+}

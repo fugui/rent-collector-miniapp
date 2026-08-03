@@ -1,0 +1,203 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <!-- 头部月份与季节标识 -->
+  <view class="header-card card">
+    <view class="flex-between">
+      <view class="month-selector">
+        <text class="label">选择计费月份：</text>
+        <picker mode="date" fields="month" value="{{selectedMonth}}" bindchange="onMonthChange">
+          <view class="picker-btn">
+            <text class="month-text">{{selectedMonth}}</text>
+            <text class="arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+      <view class="season-badge {{isSummer ? 'summer' : 'non-summer'}}">
+        <text>{{isSummer ? '☀️ 夏季电价(5-10月)' : '❄️ 非夏季电价(11-4月)'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 读数异常警告提示 -->
+  <view class="warning-banner" wx:if="{{warningMessage}}">
+    <text>{{warningMessage}}</text>
+  </view>
+
+  <!-- Section 1: 总水表读数 & 当月总用电量 -->
+  <view class="card">
+    <view class="card-title">
+      <text>🌐 1. 入口总表 (两套房合缴入口)</text>
+    </view>
+
+    <!-- 总水表读数 -->
+    <view class="meter-block">
+      <view class="meter-title flex-between">
+        <text class="name">💧 总水表 (m³ 读数扣减)</text>
+        <text class="calc-tag">总用水量: {{calculatedUsage.totalWater}} m³</text>
+      </view>
+      <view class="input-grid">
+        <view class="input-item">
+          <text class="form-label">上月读数</text>
+          <input class="form-input" type="digit" placeholder="上月水表" value="{{readings.prevTotalWater}}" data-field="prevTotalWater" bindinput="onInputReading" />
+        </view>
+        <view class="input-item">
+          <text class="form-label">本月读数</text>
+          <input class="form-input highlight" type="digit" placeholder="本月水表" value="{{readings.currTotalWater}}" data-field="currTotalWater" bindinput="onInputReading" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 当月总用电量 -->
+    <view class="meter-block mt-20">
+      <view class="meter-title flex-between">
+        <text class="name">⚡ 当月总用电量 (度)</text>
+        <text class="calc-tag">两套房总用电: {{calculatedUsage.totalElec}} 度</text>
+      </view>
+      <view class="input-item">
+        <text class="form-label">直接填供电局账单度数 (两套房总电量)</text>
+        <input class="form-input highlight" type="digit" placeholder="例: 1000" value="{{readings.totalElecUsage}}" data-field="totalElecUsage" bindinput="onInputReading" />
+      </view>
+      <view class="tip-text mt-12">💡 提示：电表账单写多少度就填多少度（例如两套房共用了 1000 度，直接填 1000）。</view>
+    </view>
+  </view>
+
+  <!-- Section 2: 1602 房抄表录入与用量 -->
+  <view class="card">
+    <view class="card-title flex-between">
+      <text>🏢 2. 1602 房表计与拆分用量</text>
+      <text class="sub-tip">1602 独立煤气表</text>
+    </view>
+
+    <!-- 1602 煤气表 -->
+    <view class="meter-block">
+      <view class="meter-title flex-between">
+        <text class="name">🔥 1602 独立煤气表 (m³)</text>
+        <text class="calc-tag">用量: {{calculatedUsage.g1602}} m³</text>
+      </view>
+      <view class="input-grid">
+        <view class="input-item">
+          <text class="form-label">上月读数</text>
+          <input class="form-input" type="digit" placeholder="1602上月" value="{{readings.prev1602Gas}}" data-field="prev1602Gas" bindinput="onInputReading" />
+        </view>
+        <view class="input-item">
+          <text class="form-label">本月读数</text>
+          <input class="form-input highlight" type="digit" placeholder="1602本月" value="{{readings.curr1602Gas}}" data-field="curr1602Gas" bindinput="onInputReading" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 1602 水电拆分结果展示条 -->
+    <view class="split-result-box mt-24">
+      <view class="split-title">💡 自动扣减拆分得出 1602 水电用量：</view>
+      <view class="split-row flex-between">
+        <text>💧 1602水用量 (总 {{calculatedUsage.totalWater}} - 1702):</text>
+        <text class="split-val">{{calculatedUsage.w1602}} m³</text>
+      </view>
+      <view class="split-row flex-between">
+        <text>⚡ 1602电用量 (总 {{calculatedUsage.totalElec}} - 1702):</text>
+        <text class="split-val">{{calculatedUsage.e1602}} 度</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Section 3: 1702 房独立表计录入 (水表、电表、煤气表) -->
+  <view class="card">
+    <view class="card-title flex-between">
+      <text>🏢 3. 1702 房表计录入</text>
+      <text class="sub-tip">1702 独立水/电/煤气表</text>
+    </view>
+
+    <!-- 1702水表 -->
+    <view class="meter-block">
+      <view class="meter-title flex-between">
+        <text class="name">💧 1702 水表 (m³)</text>
+        <text class="calc-tag">用量: {{calculatedUsage.w1702}} m³</text>
+      </view>
+      <view class="input-grid">
+        <view class="input-item">
+          <text class="form-label">上月读数</text>
+          <input class="form-input" type="digit" placeholder="1702上月" value="{{readings.prev1702Water}}" data-field="prev1702Water" bindinput="onInputReading" />
+        </view>
+        <view class="input-item">
+          <text class="form-label">本月读数</text>
+          <input class="form-input highlight" type="digit" placeholder="1702本月" value="{{readings.curr1702Water}}" data-field="curr1702Water" bindinput="onInputReading" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 1702电表 -->
+    <view class="meter-block mt-20">
+      <view class="meter-title flex-between">
+        <text class="name">⚡ 1702 电表 (度)</text>
+        <text class="calc-tag">用量: {{calculatedUsage.e1702}} 度</text>
+      </view>
+      <view class="input-grid">
+        <view class="input-item">
+          <text class="form-label">上月读数</text>
+          <input class="form-input" type="digit" placeholder="1702上月" value="{{readings.prev1702Elec}}" data-field="prev1702Elec" bindinput="onInputReading" />
+        </view>
+        <view class="input-item">
+          <text class="form-label">本月读数</text>
+          <input class="form-input highlight" type="digit" placeholder="1702本月" value="{{readings.curr1702Elec}}" data-field="curr1702Elec" bindinput="onInputReading" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 1702 煤气表 -->
+    <view class="meter-block mt-20">
+      <view class="meter-title flex-between">
+        <text class="name">🔥 1702 煤气表 (m³)</text>
+        <text class="calc-tag">用量: {{calculatedUsage.g1702}} m³</text>
+      </view>
+      <view class="input-grid">
+        <view class="input-item">
+          <text class="form-label">上月读数</text>
+          <input class="form-input" type="digit" placeholder="1702上月" value="{{readings.prev1702Gas}}" data-field="prev1702Gas" bindinput="onInputReading" />
+        </view>
+        <view class="input-item">
+          <text class="form-label">本月读数</text>
+          <input class="form-input highlight" type="digit" placeholder="1702本月" value="{{readings.curr1702Gas}}" data-field="curr1702Gas" bindinput="onInputReading" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 试算结果预览 -->
+  <view class="card preview-card" wx:if="{{previewBill}}">
+    <view class="card-title">
+      <text>📊 当月账单试算预览</text>
+    </view>
+    <view class="preview-grid">
+      <!-- 1602 预览 -->
+      <view class="preview-box">
+        <view class="room-tag">1602 房</view>
+        <view class="amount">¥ {{previewBill.house1602.totalAmount}}</view>
+        <view class="sub-detail">
+          <text>房租: ¥{{previewBill.house1602.baseRent}}</text>
+          <text>物业: ¥{{previewBill.house1602.propertyFee}}</text>
+          <text>水费: ¥{{previewBill.house1602.water.totalCost}}</text>
+          <text>电费: ¥{{previewBill.house1602.elec.totalCost}}</text>
+          <text>气费: ¥{{previewBill.house1602.gas.totalCost}}</text>
+        </view>
+      </view>
+
+      <!-- 1702 预览 -->
+      <view class="preview-box">
+        <view class="room-tag">1702 房</view>
+        <view class="amount">¥ {{previewBill.house1702.totalAmount}}</view>
+        <view class="sub-detail">
+          <text>房租: ¥{{previewBill.house1702.baseRent}}</text>
+          <text>物业: ¥{{previewBill.house1702.propertyFee}}</text>
+          <text>水费: ¥{{previewBill.house1702.water.totalCost}}</text>
+          <text>电费: ¥{{previewBill.house1702.elec.totalCost}}</text>
+          <text>气费: ¥{{previewBill.house1702.gas.totalCost}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作与提交 -->
+  <view class="action-bar">
+    <button class="btn-primary" bindtap="onSaveAndDetail">生成并查看当月账单</button>
+  </view>
+</view>

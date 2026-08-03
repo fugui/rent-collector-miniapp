@@ -1,0 +1,66 @@
+<!-- pages/history/history.wxml -->
+<view class="container">
+  <!-- 顶部全景统计板 -->
+  <view class="stats-card card">
+    <view class="stats-header flex-between">
+      <text class="title">📈 房租与水电历史总览</text>
+      <text class="count-badge">已录入 {{stats.monthCount}} 个月</text>
+    </view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="label">累计总应收</text>
+        <text class="val primary">¥ {{stats.totalRevenue}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="label">累计用水</text>
+        <text class="val">{{stats.totalWater}} m³</text>
+      </view>
+      <view class="stat-item">
+        <text class="label">累计用电</text>
+        <text class="val">{{stats.totalElec}} 度</text>
+      </view>
+    </view>
+    <view class="export-box mt-20">
+      <button class="btn-primary btn-export" bindtap="onExportCSV">📤 一键导出全部历史清单 (CSV表格文本)</button>
+    </view>
+  </view>
+
+  <!-- 历史记录列表 -->
+  <view class="section-title">
+    <text>📅 历史月度账单列表</text>
+  </view>
+
+  <view class="empty-tip" wx:if="{{historyList.length === 0}}">
+    <text>暂无历史账单，请前往“抄表算费”录入第一笔账单吧！</text>
+  </view>
+
+  <view class="history-list" wx:else>
+    <block wx:for="{{historyList}}" wx:key="month">
+      <view class="history-card card" data-month="{{item.month}}" bindtap="onViewDetail">
+        <view class="history-header flex-between">
+          <view class="month-tag">
+            <text class="icon">🗓️</text>
+            <text class="month-name">{{item.month}}</text>
+          </view>
+          <text class="arrow-icon">详情 ➔</text>
+        </view>
+
+        <view class="rooms-preview flex-between">
+          <view class="room-preview-item">
+            <text class="room-label">1602房：</text>
+            <text class="room-price">¥{{item.billData.house1602.totalAmount}}</text>
+          </view>
+          <view class="room-preview-item">
+            <text class="room-label">1702房：</text>
+            <text class="room-price">¥{{item.billData.house1702.totalAmount}}</text>
+          </view>
+        </view>
+
+        <view class="history-footer flex-between">
+          <text class="time-tip">两套合缴：¥{{item.billData.house1602.totalAmount + item.billData.house1702.totalAmount}}</text>
+          <text class="tag-status">已存本地</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

@@ -1,0 +1,126 @@
+<!-- pages/settings/settings.wxml -->
+<view class="container">
+  <!-- 房屋租金与物业管理费配置 -->
+  <view class="card">
+    <view class="card-title">
+      <text>🏠 房屋固定费用设置</text>
+    </view>
+    
+    <!-- 1602房 -->
+    <view class="house-setting-group">
+      <view class="sub-group-title">1602 房</view>
+      <view class="input-grid">
+        <view class="input-item">
+          <text class="form-label">基础月租金 (元)</text>
+          <input class="form-input" type="digit" value="{{rent1602}}" data-field="rent1602" bindinput="onInputChange" />
+        </view>
+        <view class="input-item">
+          <text class="form-label">固定物业费 (元)</text>
+          <input class="form-input" type="digit" value="{{propFee1602}}" data-field="propFee1602" bindinput="onInputChange" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 1702房 -->
+    <view class="house-setting-group mt-20">
+      <view class="sub-group-title">1702 房</view>
+      <view class="input-grid">
+        <view class="input-item">
+          <text class="form-label">基础月租金 (元)</text>
+          <input class="form-input" type="digit" value="{{rent1702}}" data-field="rent1702" bindinput="onInputChange" />
+        </view>
+        <view class="input-item">
+          <text class="form-label">固定物业费 (元)</text>
+          <input class="form-input" type="digit" value="{{propFee1702}}" data-field="propFee1702" bindinput="onInputChange" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 💧 深圳市阶梯水价设置 -->
+  <view class="card">
+    <view class="card-title">
+      <text>💧 深圳市居民水价 (元/m³)</text>
+    </view>
+    <view class="input-grid-3">
+      <view class="input-item">
+        <text class="form-label">一档 (0-22m³)</text>
+        <input class="form-input" type="digit" value="{{waterP1}}" data-field="waterP1" bindinput="onInputChange" />
+      </view>
+      <view class="input-item">
+        <text class="form-label">二档 (22-30m³)</text>
+        <input class="form-input" type="digit" value="{{waterP2}}" data-field="waterP2" bindinput="onInputChange" />
+      </view>
+      <view class="input-item">
+        <text class="form-label">三档 (30m³以上)</text>
+        <input class="form-input" type="digit" value="{{waterP3}}" data-field="waterP3" bindinput="onInputChange" />
+      </view>
+    </view>
+  </view>
+
+  <!-- ⚡ 深圳市阶梯电价设置 (夏/非夏) -->
+  <view class="card">
+    <view class="card-title">
+      <text>⚡ 深圳市居民电价 (元/度)</text>
+    </view>
+    
+    <view class="sub-group-title">☀️ 夏季标准 (5月 - 10月)</view>
+    <view class="input-grid-3">
+      <view class="input-item">
+        <text class="form-label">一档 (0-260度)</text>
+        <input class="form-input" type="digit" value="{{elecSumP1}}" data-field="elecSumP1" bindinput="onInputChange" />
+      </view>
+      <view class="input-item">
+        <text class="form-label">二档 (260-600度)</text>
+        <input class="form-input" type="digit" value="{{elecSumP2}}" data-field="elecSumP2" bindinput="onInputChange" />
+      </view>
+      <view class="input-item">
+        <text class="form-label">三档 (600度以上)</text>
+        <input class="form-input" type="digit" value="{{elecSumP3}}" data-field="elecSumP3" bindinput="onInputChange" />
+      </view>
+    </view>
+
+    <view class="sub-group-title mt-20">❄️ 非夏季标准 (11月 - 次年4月)</view>
+    <view class="input-grid-3">
+      <view class="input-item">
+        <text class="form-label">一档 (0-200度)</text>
+        <input class="form-input" type="digit" value="{{elecNonSumP1}}" data-field="elecNonSumP1" bindinput="onInputChange" />
+      </view>
+      <view class="input-item">
+        <text class="form-label">二档 (200-400度)</text>
+        <input class="form-input" type="digit" value="{{elecNonSumP2}}" data-field="elecNonSumP2" bindinput="onInputChange" />
+      </view>
+      <view class="input-item">
+        <text class="form-label">三档 (400度以上)</text>
+        <input class="form-input" type="digit" value="{{elecNonSumP3}}" data-field="elecNonSumP3" bindinput="onInputChange" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 🔥 深圳市天然气阶梯设置 -->
+  <view class="card">
+    <view class="card-title">
+      <text>🔥 深圳市管道天然气价 (元/m³)</text>
+    </view>
+    <view class="input-grid-3">
+      <view class="input-item">
+        <text class="form-label">一档 (0-30m³)</text>
+        <input class="form-input" type="digit" value="{{gasP1}}" data-field="gasP1" bindinput="onInputChange" />
+      </view>
+      <view class="input-item">
+        <text class="form-label">二档 (30-40m³)</text>
+        <input class="form-input" type="digit" value="{{gasP2}}" data-field="gasP2" bindinput="onInputChange" />
+      </view>
+      <view class="input-item">
+        <text class="form-label">三档 (40m³以上)</text>
+        <input class="form-input" type="digit" value="{{gasP3}}" data-field="gasP3" bindinput="onInputChange" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮栏 -->
+  <view class="action-bar">
+    <button class="btn-primary" bindtap="saveCurrentConfig">💾 保存全局设置</button>
+    <button class="btn-outline mt-20" bindtap="resetToDefault">🔄 恢复深圳默认计价标准</button>
+  </view>
+</view>

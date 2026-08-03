@@ -1,0 +1,204 @@
+/* pages/index/index.wxss */
+.header-card {
+  background: linear-gradient(135deg, #3730a3 0%, #4f46e5 100%);
+  color: #ffffff;
+  padding: 30rpx;
+  border-radius: 24rpx;
+}
+
+.month-selector {
+  display: flex;
+  align-items: center;
+}
+
+.month-selector .label {
+  font-size: 26rpx;
+  opacity: 0.9;
+}
+
+.picker-btn {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 10rpx 24rpx;
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.month-text {
+  font-size: 32rpx;
+  font-weight: 700;
+  margin-right: 12rpx;
+}
+
+.arrow {
+  font-size: 20rpx;
+  opacity: 0.8;
+}
+
+.season-badge {
+  font-size: 22rpx;
+  font-weight: 600;
+  padding: 8rpx 18rpx;
+  border-radius: 30rpx;
+}
+
+.season-badge.summer {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.season-badge.non-summer {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.warning-banner {
+  background: #fef2f2;
+  border: 1rpx solid #fca5a5;
+  color: #b91c1c;
+  padding: 20rpx 24rpx;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  margin-bottom: 24rpx;
+}
+
+.sub-tip {
+  font-size: 22rpx;
+  color: #6366f1;
+  font-weight: 400;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.mt-12 {
+  margin-top: 12rpx;
+}
+
+.meter-block {
+  background: #f8fafc;
+  padding: 24rpx;
+  border-radius: 16rpx;
+  border: 1rpx solid #e2e8f0;
+}
+
+.meter-title {
+  margin-bottom: 16rpx;
+}
+
+.meter-title .name {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.calc-tag {
+  font-size: 24rpx;
+  color: #4f46e5;
+  font-weight: 600;
+  background: #e0e7ff;
+  padding: 4rpx 14rpx;
+  border-radius: 20rpx;
+}
+
+.input-grid {
+  display: flex;
+  gap: 20rpx;
+}
+
+.input-item {
+  flex: 1;
+}
+
+.form-input.highlight {
+  background: #ffffff;
+  border-color: #818cf8;
+  box-shadow: 0 2rpx 8rpx rgba(99, 102, 241, 0.1);
+}
+
+.mt-20 {
+  margin-top: 20rpx;
+}
+
+.mt-24 {
+  margin-top: 24rpx;
+}
+
+/* 拆分结果框 */
+.split-result-box {
+  background: #eff6ff;
+  border: 1rpx dashed #60a5fa;
+  padding: 20rpx 24rpx;
+  border-radius: 16rpx;
+}
+
+.split-title {
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin-bottom: 12rpx;
+}
+
+.split-row {
+  font-size: 26rpx;
+  color: #334155;
+  margin-top: 8rpx;
+}
+
+.split-val {
+  font-weight: 700;
+  color: #1e40af;
+}
+
+/* 预览卡片 */
+.preview-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+}
+
+.preview-grid {
+  display: flex;
+  gap: 20rpx;
+}
+
+.preview-box {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  border: 2rpx solid #e0e7ff;
+  text-align: center;
+}
+
+.room-tag {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #3730a3;
+  margin-bottom: 8rpx;
+}
+
+.amount {
+  font-size: 36rpx;
+  font-weight: 800;
+  color: #4f46e5;
+  margin-bottom: 16rpx;
+}
+
+.sub-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  font-size: 22rpx;
+  color: #64748b;
+  text-align: left;
+}
+
+/* 底部按钮 */
+.action-bar {
+  margin-top: 40rpx;
+  margin-bottom: 60rpx;
+}

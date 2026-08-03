@@ -1,0 +1,119 @@
+<!-- pages/bill-detail/bill-detail.wxml -->
+<view class="container" wx:if="{{bill}}">
+  <!-- 头部选项卡切换 1602 / 1702 -->
+  <view class="tab-bar card">
+    <view class="tab-item {{activeTab === '1602' ? 'active' : ''}}" data-tab="1602" bindtap="switchTab">
+      <text class="tab-title">1602 房账单</text>
+      <text class="tab-amount">¥{{bill.house1602.totalAmount}}</text>
+    </view>
+    <view class="tab-item {{activeTab === '1702' ? 'active' : ''}}" data-tab="1702" bindtap="switchTab">
+      <text class="tab-title">1702 房账单</text>
+      <text class="tab-amount">¥{{bill.house1702.totalAmount}}</text>
+    </view>
+  </view>
+
+  <!-- 当前选中的房屋卡片详情 -->
+  <view class="detail-card card">
+    <block wx:set="{{ house = activeTab === '1602' ? bill.house1602 : bill.house1702 }}">
+      <view class="card-header flex-between">
+        <view class="room-title">
+          <text class="emoji">🏠</text>
+          <text class="name">{{activeTab}} 房账单明细</text>
+        </view>
+        <view class="total-tag">合计：¥{{activeTab === '1602' ? bill.house1602.totalAmount : bill.house1702.totalAmount}}</view>
+      </view>
+
+      <view class="item-list">
+        <!-- 基础房租 & 物业费 -->
+        <view class="item-row flex-between">
+          <text class="item-name">💰 基础房租</text>
+          <text class="item-val">¥{{activeTab === '1602' ? bill.house1602.baseRent : bill.house1702.baseRent}}</text>
+        </view>
+        <view class="item-row flex-between">
+          <text class="item-name">🏢 物业管理费 (固定)</text>
+          <text class="item-val">¥{{activeTab === '1602' ? bill.house1602.propertyFee : bill.house1702.propertyFee}}</text>
+        </view>
+
+        <!-- 水费明细框 -->
+        <view class="utility-box water-box">
+          <view class="utility-header flex-between">
+            <text class="utility-title">💧 水费 (阶梯计价)</text>
+            <text class="utility-total">¥{{activeTab === '1602' ? bill.house1602.water.totalCost : bill.house1702.water.totalCost}}</text>
+          </view>
+          <view class="usage-sub">
+            用量：{{activeTab === '1602' ? bill.house1602.water.usage : bill.house1702.water.usage}} m³
+            (读数: {{activeTab === '1602' ? bill.house1602.readings.prevWater : bill.house1702.readings.prevWater}} ➔ {{activeTab === '1602' ? bill.house1602.readings.currWater : bill.house1702.readings.currWater}})
+          </view>
+          <view class="tier-list">
+            <block wx:for="{{activeTab === '1602' ? bill.house1602.water.breakdown : bill.house1702.water.breakdown}}" wx:key="tierIndex">
+              <view class="tier-row flex-between">
+                <text>{{item.name}} ({{item.used}}m³ × ¥{{item.price}})</text>
+                <text>¥{{item.cost}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+
+        <!-- 电费明细框 -->
+        <view class="utility-box elec-box">
+          <view class="utility-header flex-between">
+            <text class="utility-title">⚡ 电费 (阶梯计价)</text>
+            <text class="utility-total">¥{{activeTab === '1602' ? bill.house1602.elec.totalCost : bill.house1702.elec.totalCost}}</text>
+          </view>
+          <view class="usage-sub">
+            用量：{{activeTab === '1602' ? bill.house1602.elec.usage : bill.house1702.elec.usage}} 度
+            (读数: {{activeTab === '1602' ? bill.house1602.readings.prevElec : bill.house1702.readings.prevElec}} ➔ {{activeTab === '1602' ? bill.house1602.readings.currElec : bill.house1702.readings.currElec}})
+          </view>
+          <view class="tier-list">
+            <block wx:for="{{activeTab === '1602' ? bill.house1602.elec.breakdown : bill.house1702.elec.breakdown}}" wx:key="tierIndex">
+              <view class="tier-row flex-between">
+                <text>{{item.name}} ({{item.used}}度 × ¥{{item.price}})</text>
+                <text>¥{{item.cost}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+
+        <!-- 煤气费明细框 -->
+        <view class="utility-box gas-box">
+          <view class="utility-header flex-between">
+            <text class="utility-title">🔥 煤气费 (阶梯计价)</text>
+            <text class="utility-total">¥{{activeTab === '1602' ? bill.house1602.gas.totalCost : bill.house1702.gas.totalCost}}</text>
+          </view>
+          <view class="usage-sub">
+            用量：{{activeTab === '1602' ? bill.house1602.gas.usage : bill.house1702.gas.usage}} m³
+            (读数: {{activeTab === '1602' ? bill.house1602.readings.prevGas : bill.house1702.readings.prevGas}} ➔ {{activeTab === '1602' ? bill.house1602.readings.currGas : bill.house1702.readings.currGas}})
+          </view>
+          <view class="tier-list">
+            <block wx:for="{{activeTab === '1602' ? bill.house1602.gas.breakdown : bill.house1702.gas.breakdown}}" wx:key="tierIndex">
+              <view class="tier-row flex-between">
+                <text>{{item.name}} ({{item.used}}m³ × ¥{{item.price}})</text>
+                <text>¥{{item.cost}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 微信长文文本卡片预览与一键复制 -->
+  <view class="card copy-preview-card">
+    <view class="card-title flex-between">
+      <text>💬 微信发送预览（格式化文本）</text>
+      <button class="btn-copy" bindtap="copyTenantText">复制 {{activeTab}} 文本消息</button>
+    </view>
+    <view class="text-preview">
+      <text>{{activeTab === '1602' ? text1602 : text1702}}</text>
+    </view>
+  </view>
+
+  <!-- 底部操作按钮 -->
+  <view class="action-buttons">
+    <button class="btn-primary" bindtap="generateImagePoster" loading="{{isGeneratingImage}}">🖼️ 导出 {{activeTab}} 图片账单到相册</button>
+    <button class="btn-danger-outline" bindtap="onDeleteBill">🗑️ 删除该月账单</button>
+  </view>
+
+  <!-- Canvas 用于绘制海报（移出视口外） -->
+  <canvas canvas-id="posterCanvas" style="width: 360px; height: 540px; position: fixed; left: -9999px; top: -9999px;"></canvas>
+</view>
