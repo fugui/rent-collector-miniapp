@@ -2,7 +2,7 @@
   "miniprogramRoot": "./",
   "projectname": "rent-collector-miniapp",
   "description": "深圳房租水电阶梯收缴助手",
-  "appid": "wxe8945f5c8e9a068d",
+  "appid": "wx8de39cb1c9574fe8",
   "setting": {
     "urlCheck": false,
     "es6": true,
