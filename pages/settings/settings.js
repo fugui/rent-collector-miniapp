@@ -9,25 +9,25 @@ Page({
     rent1702: '6800',
     propFee1702: '395.83',
 
-    // 水费单价
-    waterP1: '3.47',
-    waterP2: '4.83',
-    waterP3: '8.91',
+    // 水费单价（综合水价：自来水费 + 污水处理费）
+    waterP1: '3.67',
+    waterP2: '6.04',
+    waterP3: '12.35',
 
     // 夏季电费单价
-    elecSumP1: '0.5986',
-    elecSumP2: '0.6486',
-    elecSumP3: '0.8986',
+    elecSumP1: '0.6629',
+    elecSumP2: '0.7129',
+    elecSumP3: '0.9629',
 
     // 非夏季电费单价
-    elecNonSumP1: '0.5986',
-    elecNonSumP2: '0.6486',
-    elecNonSumP3: '0.8986',
+    elecNonSumP1: '0.6629',
+    elecNonSumP2: '0.7129',
+    elecNonSumP3: '0.9629',
 
     // 煤气单价
-    gasP1: '3.50',
-    gasP2: '4.025',
-    gasP3: '5.25'
+    gasP1: '3.41',
+    gasP2: '3.91',
+    gasP3: '5.16'
   },
 
   onShow: function () {

@@ -2,37 +2,37 @@
  * 深圳市水电煤阶梯计价与用量拆分计算引擎
  */
 
-// 默认深圳计价规则配置
+// 默认深圳计价规则配置（2026年现行标准）
 const DEFAULT_PRICING = {
-  // 水费阶梯（元/立方米）
+  // 水费阶梯（元/立方米，综合水价：自来水费 + 污水处理费）
   water: {
     tiers: [
-      { max: 22, price: 3.47, name: '一档(0-22m³)' },
-      { max: 30, price: 4.83, name: '二档(22-30m³)' },
-      { max: Infinity, price: 8.91, name: '三档(30m³以上)' }
+      { max: 22, price: 3.67, name: '一档(0-22m³)' },
+      { max: 30, price: 6.04, name: '二档(22-30m³)' },
+      { max: Infinity, price: 12.35, name: '三档(30m³以上)' }
     ]
   },
   // 电费阶梯（元/度）
   electricity: {
     // 夏季：5月-10月
     summerTiers: [
-      { max: 260, price: 0.5986, name: '一档(0-260度)' },
-      { max: 600, price: 0.6486, name: '二档(260-600度)' },
-      { max: Infinity, price: 0.8986, name: '三档(600度以上)' }
+      { max: 260, price: 0.6629, name: '一档(0-260度)' },
+      { max: 600, price: 0.7129, name: '二档(260-600度)' },
+      { max: Infinity, price: 0.9629, name: '三档(600度以上)' }
     ],
     // 非夏季：11月-次年4月
     nonSummerTiers: [
-      { max: 200, price: 0.5986, name: '一档(0-200度)' },
-      { max: 400, price: 0.6486, name: '二档(200-400度)' },
-      { max: Infinity, price: 0.8986, name: '三档(401度以上)' }
+      { max: 200, price: 0.6629, name: '一档(0-200度)' },
+      { max: 400, price: 0.7129, name: '二档(200-400度)' },
+      { max: Infinity, price: 0.9629, name: '三档(401度以上)' }
     ]
   },
   // 管道天然气阶梯（元/立方米）
   gas: {
     tiers: [
-      { max: 30, price: 3.50, name: '一档(0-30m³)' },
-      { max: 40, price: 4.025, name: '二档(30-40m³)' },
-      { max: Infinity, price: 5.25, name: '三档(40m³以上)' }
+      { max: 30, price: 3.41, name: '一档(0-30m³)' },
+      { max: 40, price: 3.91, name: '二档(30-40m³)' },
+      { max: Infinity, price: 5.16, name: '三档(40m³以上)' }
     ]
   }
 };
