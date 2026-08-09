@@ -188,8 +188,8 @@ function calculateMonthlyBill(input, config) {
 
   // 7. 基础租金与物业费
   const houseConfig = config?.houses || {
-    '1602': { baseRent: 7000, propertyFee: 150 },
-    '1702': { baseRent: 6800, propertyFee: 150 }
+    '1602': { baseRent: 7000, propertyFee: 395.83 },
+    '1702': { baseRent: 6800, propertyFee: 395.83 }
   };
 
   const rent1602 = Number(houseConfig['1602']?.baseRent || 0);

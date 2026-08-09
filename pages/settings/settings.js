@@ -5,9 +5,9 @@ Page({
   data: {
     // 房屋配置
     rent1602: '7000',
-    propFee1602: '150',
+    propFee1602: '395.83',
     rent1702: '6800',
-    propFee1702: '150',
+    propFee1702: '395.83',
 
     // 水费单价
     waterP1: '3.47',
