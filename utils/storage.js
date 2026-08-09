@@ -13,8 +13,8 @@ const KEYS = {
 // 默认基础配置
 const DEFAULT_CONFIG = {
   houses: {
-    '1602': { baseRent: 3500, propertyFee: 150 },
-    '1702': { baseRent: 3800, propertyFee: 150 }
+    '1602': { baseRent: 7000, propertyFee: 150 },
+    '1702': { baseRent: 6800, propertyFee: 150 }
   },
   pricing: DEFAULT_PRICING
 };

@@ -4,9 +4,9 @@ const { getConfig, saveConfig, DEFAULT_CONFIG } = require('../../utils/storage')
 Page({
   data: {
     // 房屋配置
-    rent1602: '3500',
+    rent1602: '7000',
     propFee1602: '150',
-    rent1702: '3800',
+    rent1702: '6800',
     propFee1702: '150',
 
     // 水费单价
